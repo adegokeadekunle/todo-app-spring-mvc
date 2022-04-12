@@ -422,12 +422,13 @@ ul.summary-list>li:last-child {
 .input-container{
     display: flex;
     width: 100%;
-    /* background-color: red; */
+
 }
 .input-container div{
     width: 10%;
     padding: 20px;
     font-size: 2rem;
+    /* background-color: #fff; */
 }
 .input-container input{
     width: 90%;
@@ -436,7 +437,7 @@ ul.summary-list>li:last-child {
     margin-bottom: 10px;
     border:none;
     border-radius: 5px;
-    background-color: inherit;
+    background-color: #fff;
     border-bottom: 1px solid var(--tertiary-color);
 }
 .login-btn{
@@ -453,13 +454,39 @@ ul.summary-list>li:last-child {
     outline: none;
 }
 button:hover{
-    color: var(--tertiary-color);
-    border: 1px solid var(--tertiary-color);
-    background-color: var(--primary-color);
-    box-sizing: border-box;
+    border: none;
+    background: #f8f7f5 !important;
+    border-left: 5px solid var(--tertiary-color);
+    color: #89817f !important;
 }
 .h3-title{
     font-size: 2rem;
     font-weight: bold;
     color: var(--tertiary-color);
+}
+.not-icon{
+    width: 100%;
+}
+.signup-form{
+    /* background-color: #fff; */
+    padding: 10px 40px;
+}
+.signup-form input,.signup-btn{
+    width: 100%;
+    padding: 20px 40px;
+
+}
+.signup-form input{
+    margin-bottom: 10px;
+    border: none;
+    outline: none;
+}
+.signup-form button{
+    background-color: var(--tertiary-color);
+    color: var(--primary-color);
+    font-size: 1.9rem;
+}
+.toggle-loging{
+    font-family: Roboto, 'sans-serif';
+    font-size: 17px;
 }
