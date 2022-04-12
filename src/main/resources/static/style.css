@@ -112,7 +112,7 @@ body {
 }
 .p-text-input{
     border-bottom: 1px solid var(--primary-color);
-    border-radius: none;
+    border-radius: 0;
     /* margin-bottom: 10px; */
 }
 
