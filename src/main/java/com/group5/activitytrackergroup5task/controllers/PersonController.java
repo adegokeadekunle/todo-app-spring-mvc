@@ -48,27 +48,19 @@ public class PersonController {
         return "index";
     }
 
-    @PostMapping("/")
+    @PostMapping("/login")
     public String login(@ModelAttribute("loginDto") LoginDto loginDto, HttpSession session){
         Person person = personService.login(loginDto);
+        System.out.println(person);
         if (person != null){
             session.setAttribute("user", person);
             return "redirect:/home";
         }
-
         return "redirect:/";
     }
 
     @GetMapping("/home")
     public String displayTracker(Model model){
-        Todo todo = new Todo();
-        List<Todo> todos = todoService.getTodoList();
-//        int completed = ;
-//        int inprogress = ;
-            model.addAttribute("todo", todo);
-            model.addAttribute("todos", todos);
-
         return "tracker";
     }
-
 }
