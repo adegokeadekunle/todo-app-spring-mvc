@@ -3,6 +3,8 @@
 
 <head>
     <meta charset="utf-8">
+    <!--  This file has been downloaded from bootdey.com @bootdey on twitter -->
+    <!--  All snippets are MIT license http://bootdey.com/license -->
     <title>task and active tracker</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
@@ -32,9 +34,16 @@
                 <ul class="nav nav-pills nav-stacked">
                     <li class="active"><a href="#"> <i class="fa fa-user"></i> Profile</a></li>
                     <li><a href="#"> <i class="fa fa-calendar"></i> Recent Activity <span
-                            class="label label-warning pull-right r-activity">9</span></a></li>
+                            class="label label-warning pull-right r-activity" th:text="${10}"></span></a></li>
                     <li><a href="#"> <i class="fa fa-edit"></i> Edit profile</a></li>
                 </ul>
+            </div>
+            <div class="panel">
+                <h4>Edit task</h4>
+                <form>
+                    <input type="text" name="edit-title" id="edit-title">
+                    <textarea name="edit-description" id="edit-description"></textarea>
+                </form>
             </div>
         </div>
         <div class="profile-info col-md-9">
@@ -80,32 +89,15 @@
                     work smarter not harder
                 </div>
                 <div class="panel-body bio-graph-info">
-                    <h1>Bio Graph</h1>
+                    <h1>Task summary</h1>
                     <div class="row">
                         <div class="bio-row">
-                            <p><span>First Name </span>: Camila</p>
+                            <p><span>In-progress </span>: 3</p>
                         </div>
                         <div class="bio-row">
-                            <p><span>Last Name </span>: Smith</p>
+                            <p><span>Completed </span>: 5</p>
                         </div>
-                        <div class="bio-row">
-                            <p><span>Country </span>: Australia</p>
-                        </div>
-                        <div class="bio-row">
-                            <p><span>Birthday</span>: 13 July 1983</p>
-                        </div>
-                        <div class="bio-row">
-                            <p><span>Occupation </span>: UI Designer</p>
-                        </div>
-                        <div class="bio-row">
-                            <p><span>Email </span>: jsmith@flatlab.com</p>
-                        </div>
-                        <div class="bio-row">
-                            <p><span>Mobile </span>: (12) 03 4567890</p>
-                        </div>
-                        <div class="bio-row">
-                            <p><span>Phone </span>: 88 (02) 123456</p>
-                        </div>
+
                     </div>
                 </div>
             </div>
@@ -124,8 +116,12 @@
                                 </div>
                                 <div class="bio-desk">
                                     <h4 class="red">Envato Website</h4>
-                                    <p>Started : 15 July</p>
-                                    <p>Deadline : 15 August</p>
+                                    <p>Start at : 15:30 pm</p>
+                                    <p>Stop at : 17:40 pm</p>
+                                    <div class="task-footer">
+                                        <a href="#"><i class="fa fa-edit"></i></a>
+                                        <a href="#"><i class="fa fa-trash"></i></a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -143,8 +139,8 @@
                                 </div>
                                 <div class="bio-desk">
                                     <h4 class="terques">ThemeForest CMS </h4>
-                                    <p>Started : 15 July</p>
-                                    <p>Deadline : 15 August</p>
+                                    <p>Start at : 10:00 pm</p>
+                                    <p>Stop at : 12:00 pm</p>
                                 </div>
                             </div>
                         </div>
@@ -162,8 +158,8 @@
                                 </div>
                                 <div class="bio-desk">
                                     <h4 class="green">VectorLab Portfolio</h4>
-                                    <p>Started : 15 July</p>
-                                    <p>Deadline : 15 August</p>
+                                    <p>Start at : 01:00 pm</p>
+                                    <p>Stop at : 03:30 pm</p>
                                 </div>
                             </div>
                         </div>
@@ -181,8 +177,8 @@
                                 </div>
                                 <div class="bio-desk">
                                     <h4 class="purple">Adobe Muse Template</h4>
-                                    <p>Started : 15 July</p>
-                                    <p>Deadline : 15 August</p>
+                                    <p>Start at : 15:30 pm</p>
+                                    <p>Stop at : 17:40 pm</p>
                                 </div>
                             </div>
                         </div>

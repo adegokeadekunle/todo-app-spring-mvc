@@ -5,10 +5,13 @@ import com.group5.activitytrackergroup5task.dtos.PersonDto;
 import com.group5.activitytrackergroup5task.models.Person;
 import com.group5.activitytrackergroup5task.repositories.PersonRepository;
 import com.group5.activitytrackergroup5task.services.PersonService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+
+import org.springframework.stereotype.Service;
 
 @Service
 public class PersonServiceImpl implements PersonService {

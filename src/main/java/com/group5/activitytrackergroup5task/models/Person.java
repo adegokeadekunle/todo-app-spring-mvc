@@ -1,6 +1,5 @@
 package com.group5.activitytrackergroup5task.models;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,7 +16,6 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-
 public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,7 +31,10 @@ public class Person {
     @Column(nullable = false)
     @Size(min = 8, max = 12)
     private String password;
-
+    
+    @OneToMany
+    List<Todo> todos;
+    
     @CreationTimestamp
     private LocalDateTime timeCreated;
 }
