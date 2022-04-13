@@ -1,5 +1,6 @@
 package com.group5.activitytrackergroup5task.controllers;
 import com.group5.activitytrackergroup5task.dtos.LoginDto;
+import com.group5.activitytrackergroup5task.dtos.PersonDto;
 import com.group5.activitytrackergroup5task.models.Person;
 import com.group5.activitytrackergroup5task.services.PersonService;
 import com.group5.activitytrackergroup5task.models.Todo;
@@ -27,6 +28,18 @@ public class PersonController {
         this.personService = personService;
     }
 
+
+    @PostMapping("/signup")
+    public String postSignup(@ModelAttribute PersonDto personDto){
+        personService.createPerson(personDto);
+        return "signup";
+    }
+    @GetMapping("/signup")
+    public String getSignup(Model model){
+        PersonDto personDto = new PersonDto();
+        model.addAttribute("personDto", personDto);
+        return "signup";
+    }
 
     @GetMapping("/")
     public String login (Model model){
