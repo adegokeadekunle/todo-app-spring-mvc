@@ -6,12 +6,14 @@ import com.group5.activitytrackergroup5task.services.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Controller
 @RequestMapping("/todo")
-@RestController
 public class TodoController {
 
     private final TodoService todoService;
@@ -20,7 +22,6 @@ public class TodoController {
     public TodoController(TodoService todoService) {
         this.todoService = todoService;
     }
-
     @GetMapping("/all")
     public List<Todo> getTodoList() {
         return todoService.getTodoList();

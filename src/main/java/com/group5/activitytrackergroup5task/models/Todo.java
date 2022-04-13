@@ -22,6 +22,8 @@ public class Todo {
     private Long id;
     @Column(name = "title", nullable = false)
     private String title;
+    @Column(name = "status")
+    private String status;
     @Column(name = "description")
     private String description;
     @Column(name = "scheduled_on")
