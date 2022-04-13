@@ -19,4 +19,9 @@ public class PersonController {
     public String displayLogin(){
         return "redirect:/";
     }
+
+    @GetMapping("/home")
+    public String displayTracker(){
+        return "tracker";
+    }
 }

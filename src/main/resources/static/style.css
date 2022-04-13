@@ -112,7 +112,7 @@ body {
 }
 .p-text-input{
     border-bottom: 1px solid var(--primary-color);
-    border-radius: 0;
+    border-radius: none;
     /* margin-bottom: 10px; */
 }
 
@@ -489,4 +489,11 @@ button:hover{
 .toggle-loging{
     font-family: Roboto, 'sans-serif';
     font-size: 17px;
+}
+.task-footer{
+    float: right;
+}
+.task-footer > a{
+    margin: 6px;
+    color: #797979;
 }
