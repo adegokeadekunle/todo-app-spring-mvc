@@ -9,7 +9,6 @@ import java.util.List;
 public class Person {
     @Id
     private Long id;
-
     @OneToMany
     List<Todo> todos;
 }
