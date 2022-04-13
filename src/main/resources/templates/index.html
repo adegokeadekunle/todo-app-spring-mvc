@@ -16,22 +16,27 @@
 <div class="container bootstrap snippets bootdey">
     <div class="login-container">
         <h3 class="h3-title">Welcome back</h3>
-        <form>
+        <form th:action="@{/login}" th:object="${loginDto}" method="post">
             <div class="input-container">
                 <div>
                     <i class="fa fa-user"></i>
                 </div>
-                <input type="text" placeholder="username">
+                <input type="text" name="email"
+                       th:field="*{email}"
+                       placeholder="username">
 
             </div>
             <div class="input-container">
                 <div>
                     <i class="fa fa-lock"></i>
                 </div>
-                <input type="password" placeholder="password">
+                <input type="password"
+                       name="password"
+                       th:field="*{password}"
+                       placeholder="password">
 
             </div>
-            <button class="login-btn">login</button>
+            <button type="submit" class="login-btn">login</button>
         </form>
         <p class="toggle-loging">click <a th:href="@{/signup}">here</a> to login</p>
 
