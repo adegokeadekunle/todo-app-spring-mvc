@@ -10,6 +10,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -31,9 +32,6 @@ public class Person {
     @Column(nullable = false)
     @Size(min = 8, max = 12)
     private String password;
-    
-    @OneToMany
-    List<Todo> todos;
     
     @CreationTimestamp
     private LocalDateTime timeCreated;

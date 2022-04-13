@@ -16,15 +16,35 @@
 <div class="container bootstrap snippets bootdey">
     <div class="login-container">
         <h3 class="h3-title">Sign up</h3>
-        <form class="signup-form">
-            <input type="text" placeholder="first name" class="not-icon">
-            <input type="text" placeholder="last name" class="not-icon">
-            <input type="email" placeholder="email" class="not-icon">
-            <input type="password" placeholder="password" class="not-icon">
-            <input type="password" placeholder="password" class="not-icon">
-            <button class="signup-btn">sign up</button>
+        <form class="signup-form" th:action="@{/signup}" method="post" th:object="${personDto}">
+            <input type="text"
+                   name="fname"
+                   th:field="*{fname}"
+                   placeholder="first name"
+                   class="not-icon">
+            <input type="text"
+                   name="lname"
+                   th:field="*{lname}"
+                   placeholder="last
+                   name" class="not-icon">
+            <input type="email"
+                   name="email"
+                   th:field="*{email}"
+                   placeholder="email"
+                   class="not-icon">
+            <input type="password"
+                   name="password"
+                   th:field="*{password}"
+                   placeholder="password"
+                   class="not-icon">
+            <input type="password"
+                   name="cpassword"
+                   th:field="*{cpassword}"
+                   placeholder="password"
+                   class="not-icon">
+            <button type="submit" class="signup-btn">sign up</button>
         </form>
-        <p class="toggle-loging">click <a th:href="@{/login}">here</a> to login</p>
+        <p class="toggle-loging">click <a th:href="@{/}">here</a> to login</p>
 
     </div>
 </div>
