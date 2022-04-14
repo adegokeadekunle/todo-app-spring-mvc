@@ -1,9 +1,6 @@
 package com.group5.activitytrackergroup5task.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -11,6 +8,7 @@ import java.time.LocalDateTime;
 @Setter
 @AllArgsConstructor
 @Getter
+@Builder
 @NoArgsConstructor
 @Entity
 @Table(name="todo")
@@ -30,8 +28,6 @@ public class Todo {
     private LocalDateTime scheduledOn;
     @Column(name = "end_on")
     private LocalDateTime endOn;
-
-
 
 
 }
