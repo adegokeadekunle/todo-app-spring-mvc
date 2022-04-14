@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 @Setter
 @AllArgsConstructor
 @Getter
+@Builder
 @NoArgsConstructor
 @Entity
 @Table(name="todo")
@@ -27,7 +28,6 @@ public class Todo {
     private String scheduledOn;
     @Column(name = "end_on")
     private String endOn;
-
     @ManyToOne
     @JoinColumn(name = "person_id")
     private Person person;
