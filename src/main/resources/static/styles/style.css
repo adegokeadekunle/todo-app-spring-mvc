@@ -155,6 +155,7 @@ body {
     padding: 0 15px;
 }
 
+
 .bio-row p span {
     width: 100px;
     display: inline-block;
@@ -497,4 +498,36 @@ button:hover{
 .task-footer > a{
     margin: 6px;
     color: #797979;
+}
+.complete{
+    color: #4CC5CD;
+    font-size:1.2rem;
+}
+.in-progress{
+    color: green;
+    font-size:1.2rem;
+}
+.search-container{
+    float: right;
+    margin-right: 10px;
+}
+.search-container button,input{
+    padding: 10px 5px;
+    border: 0px;
+
+}
+.search-container input{
+    background-color: #f7f7f7;
+    border-radius: 7px;
+}
+.search-container button{
+    background-color: #fff;
+
+}
+.search-container button:hover{
+    background-color: #fff;
+
+}
+.search-container input:focus{
+    outline: none;
 }
