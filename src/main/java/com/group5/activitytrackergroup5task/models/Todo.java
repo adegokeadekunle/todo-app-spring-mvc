@@ -1,13 +1,10 @@
 package com.group5.activitytrackergroup5task.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-
+@ToString
 @Setter
 @AllArgsConstructor
 @Getter
@@ -27,11 +24,12 @@ public class Todo {
     @Column(name = "description")
     private String description;
     @Column(name = "scheduled_on")
-    private LocalDateTime scheduledOn;
+    private String scheduledOn;
     @Column(name = "end_on")
-    private LocalDateTime endOn;
+    private String endOn;
 
-
-
+    @ManyToOne
+    @JoinColumn(name = "person_id")
+    private Person person;
 
 }

@@ -26,7 +26,7 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public void createPerson(PersonDto personDto) {
         Person person = new Person();
-        person.setName(personDto.getFname().concat(personDto.getLname()));
+        person.setName(personDto.getFname().concat(" "+ personDto.getLname()));
         person.setEmail(personDto.getEmail());
         person.setPassword(personDto.getPassword());
 
@@ -42,6 +42,11 @@ public class PersonServiceImpl implements PersonService {
                 return currentPerson;
             }
         }
+        return null;
+    }
+
+    @Override
+    public Person getPerson(Long id) {
         return null;
     }
 }

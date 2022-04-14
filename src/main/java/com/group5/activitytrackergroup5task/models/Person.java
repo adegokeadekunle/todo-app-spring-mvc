@@ -32,7 +32,11 @@ public class Person {
     @Column(nullable = false)
     @Size(min = 8, max = 12)
     private String password;
-    
+
+    @OneToMany(mappedBy = "person")
+    List<Todo> todos;
+
     @CreationTimestamp
     private LocalDateTime timeCreated;
+
 }
