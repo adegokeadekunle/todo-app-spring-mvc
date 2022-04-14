@@ -10,12 +10,13 @@
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="./style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script
             src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"></script>
+    <link th:href="@{/styles/style.css}" rel="stylesheet" />
+
 </head>
 
 <body>
@@ -28,47 +29,41 @@
                     <a href="#">
                         <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="">
                     </a>
-                    <h1>AT UMAR</h1>
-                    <p>atumar4031@gmail.com</p>
+                    <h1 th:text="${person.getName()}"></h1>
+                    <p th:text="${person.getEmail()}"></p>
                 </div>
                 <ul class="nav nav-pills nav-stacked">
                     <li class="active"><a href="#"> <i class="fa fa-user"></i> Profile</a></li>
                     <li><a href="#"> <i class="fa fa-calendar"></i> Recent Activity <span
                             class="label label-warning pull-right r-activity" th:text="${10}"></span></a></li>
                     <li><a href="#"> <i class="fa fa-edit"></i> Edit profile</a></li>
+                    <li><a th:href="@{/logout}"> <i class="fa fa-sign-out"></i>logout</a></li>
                 </ul>
-            </div>
-            <div class="panel">
-                <h4>Edit task</h4>
-                <form>
-                    <input type="text" name="edit-title" id="edit-title">
-                    <textarea name="edit-description" id="edit-description"></textarea>
-                </form>
             </div>
         </div>
         <div class="profile-info col-md-9">
             <div class="panel">
-                <form method="post" action="addtask">
-                    <input type="text" name="title" id="title" placeholder="title"
+                <form method="post" th:action="@{/addTask}" th:object="${todoDto}">
+                    <input type="text" name="title" th:field="*{title}" placeholder="title"
                            class="form-control input-lg p-text-input">
-                    <textarea placeholder="task description" rows="2"
+                    <textarea name="description" th:field="*{description}" placeholder="task description" rows="2"
                               class="form-control input-lg p-text-area"></textarea>
                     <footer class="panel-footer">
                         <ul class="nav nav-pills">
                             <li>
                                 <div class="form-group">
                                     <div class='input-group date' id='start_at'>
-                                        <input type='text' class="form-control" placeholder="start at" />
+                                        <input type='time' class="form-control" name="scheduledOn" th:field="*{scheduledOn}" placeholder="start at" />
                                         <span class="input-group-addon">
-                                                <span class="glyphicon glyphicon-time"></span>
-                                            </span>
+                                            <span class="glyphicon glyphicon-time"></span>
+                                        </span>
                                     </div>
                                 </div>
                             </li>
                             <li>
                                 <div class="form-group">
                                     <div class='input-group date' id='stop_at'>
-                                        <input type='text' class="form-control" placeholder="stop at" />
+                                        <input type='time' class="form-control" name="endOn" th:field="*{endOn}" placeholder="stop at" />
                                         <span class="input-group-addon">
                                                 <span class="glyphicon glyphicon-time"></span>
                                             </span>
@@ -76,10 +71,8 @@
                                 </div>
                             </li>
                             <li>
-                                <button class="btn pull-right task-button">add</button>
-
+                                <button type="submit" class="btn pull-right task-button">add</button>
                             </li>
-
                         </ul>
                     </footer>
                 </form>
@@ -92,93 +85,43 @@
                     <h1>Task summary</h1>
                     <div class="row">
                         <div class="bio-row">
-                            <p><span>In-progress </span>: 3</p>
+                            <p class="in-progress"><span>In-progress </span>: <span th:text="${in_progres}"></span></p>
                         </div>
                         <div class="bio-row">
-                            <p><span>Completed </span>: 5</p>
+                            <p class="complete"><span>Completed </span>: <span th:text="${completed}"></span></p>
                         </div>
-
+                        <div class="search-container">
+                            <form th:action="@{/search}" method="get">
+                                <input type="text" name="text" id="text" placeholder="search">
+                                <button type="submit"> <i class="fa fa-search"></i></button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
             <div>
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-6" th:each="myTodo: ${myTodos}">
                         <div class="panel">
                             <div class="panel-body">
                                 <div class="bio-chart">
-                                    <div style="display:inline;width:100px;height:100px;"><canvas width="100"
-                                                                                                  height="100px"></canvas><input class="knob" data-width="100"
-                                                                                                                                 data-height="100" data-displayprevious="true" data-thickness=".2"
-                                                                                                                                 value="35" data-fgcolor="#e06b7d" data-bgcolor="#e8e8e8"
-                                                                                                                                 style="width: 54px; height: 33px; position: absolute; vertical-align: middle; margin-top: 33px; margin-left: -77px; border: 0px; font-weight: bold; font-style: normal; font-variant: normal; font-stretch: normal; font-size: 20px; line-height: normal; font-family: Arial; text-align: center; color: rgb(224, 107, 125); padding: 0px; -webkit-appearance: none; background: none;">
+                                    <div style="display:inline;width:100px;height:100px;">
+                                        <canvas width="100" height="100px"></canvas>
+                                        <input th:class="${myTodo.getStatus().equals('in-progress') ? 'knob in-progress' : 'knob complete'}" data-width="100" data-height="100"
+                                               data-displayprevious="true" data-thickness=".2"
+                                               th:value="${myTodo.getId()}" data-fgcolor="#e06b7d" data-bgcolor="#e8e8e8"
+                                               style="width: 54px; height: 33px; position: absolute; vertical-align: middle; margin-top: 33px; margin-left: -77px; border: 0px; font-weight: bold; font-style: normal; font-variant: normal; font-stretch: normal; font-size: 20px; line-height: normal; font-family: Arial; text-align: center; padding: 0px; -webkit-appearance: none; background: none;">
                                     </div>
                                 </div>
                                 <div class="bio-desk">
-                                    <h4 class="red">Envato Website</h4>
-                                    <p>Start at : 15:30 pm</p>
-                                    <p>Stop at : 17:40 pm</p>
+                                    <h4 th:class="${myTodo.getStatus().equals('in-progress') ? 'green' : 'complete'}" th:text="${myTodo.getTitle()}"></h4>
+                                    <p>Start at : <span th:text="${myTodo.getScheduledOn()}"></span></p>
+                                    <p>Stop at : <span th:text="${myTodo.getEndOn()}"></span></p>
                                     <div class="task-footer">
-                                        <a href="#"><i class="fa fa-edit"></i></a>
-                                        <a href="#"><i class="fa fa-trash"></i></a>
+                                        <a th:href="@{/isCompleted/{status}(status= ${myTodo.getId()})}">
+                                            <i th:class="${myTodo.getStatus().equals('in-progress') ? 'fa fa-toggle-off in-progress' : 'fa fa-toggle-on complete'}"></i></a>
+                                        <a th:href="@{/delete/{del}(del=${myTodo.getId()})}"><i class="fa fa-trash" style="color: red"></i></a>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="panel">
-                            <div class="panel-body">
-                                <div class="bio-chart">
-                                    <div style="display:inline;width:100px;height:100px;"><canvas width="100"
-                                                                                                  height="100px"></canvas><input class="knob" data-width="100"
-                                                                                                                                 data-height="100" data-displayprevious="true" data-thickness=".2"
-                                                                                                                                 value="63" data-fgcolor="#4CC5CD" data-bgcolor="#e8e8e8"
-                                                                                                                                 style="width: 54px; height: 33px; position: absolute; vertical-align: middle; margin-top: 33px; margin-left: -77px; border: 0px; font-weight: bold; font-style: normal; font-variant: normal; font-stretch: normal; font-size: 20px; line-height: normal; font-family: Arial; text-align: center; color: rgb(76, 197, 205); padding: 0px; -webkit-appearance: none; background: none;">
-                                    </div>
-                                </div>
-                                <div class="bio-desk">
-                                    <h4 class="terques">ThemeForest CMS </h4>
-                                    <p>Start at : 10:00 pm</p>
-                                    <p>Stop at : 12:00 pm</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="panel">
-                            <div class="panel-body">
-                                <div class="bio-chart">
-                                    <div style="display:inline;width:100px;height:100px;"><canvas width="100"
-                                                                                                  height="100px"></canvas><input class="knob" data-width="100"
-                                                                                                                                 data-height="100" data-displayprevious="true" data-thickness=".2"
-                                                                                                                                 value="75" data-fgcolor="#96be4b" data-bgcolor="#e8e8e8"
-                                                                                                                                 style="width: 54px; height: 33px; position: absolute; vertical-align: middle; margin-top: 33px; margin-left: -77px; border: 0px; font-weight: bold; font-style: normal; font-variant: normal; font-stretch: normal; font-size: 20px; line-height: normal; font-family: Arial; text-align: center; color: rgb(150, 190, 75); padding: 0px; -webkit-appearance: none; background: none;">
-                                    </div>
-                                </div>
-                                <div class="bio-desk">
-                                    <h4 class="green">VectorLab Portfolio</h4>
-                                    <p>Start at : 01:00 pm</p>
-                                    <p>Stop at : 03:30 pm</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="panel">
-                            <div class="panel-body">
-                                <div class="bio-chart">
-                                    <div style="display:inline;width:100px;height:100px;"><canvas width="100"
-                                                                                                  height="100px"></canvas><input class="knob" data-width="100"
-                                                                                                                                 data-height="100" data-displayprevious="true" data-thickness=".2"
-                                                                                                                                 value="50" data-fgcolor="#cba4db" data-bgcolor="#e8e8e8"
-                                                                                                                                 style="width: 54px; height: 33px; position: absolute; vertical-align: middle; margin-top: 33px; margin-left: -77px; border: 0px; font-weight: bold; font-style: normal; font-variant: normal; font-stretch: normal; font-size: 20px; line-height: normal; font-family: Arial; text-align: center; color: rgb(203, 164, 219); padding: 0px; -webkit-appearance: none; background: none;">
-                                    </div>
-                                </div>
-                                <div class="bio-desk">
-                                    <h4 class="purple">Adobe Muse Template</h4>
-                                    <p>Start at : 15:30 pm</p>
-                                    <p>Stop at : 17:40 pm</p>
                                 </div>
                             </div>
                         </div>
@@ -191,16 +134,6 @@
 
 </body>
 <script type="text/javascript"></script>
-<script type="text/javascript">
-    $(function () {
-        $('#start_at').datetimepicker({
-            format: 'LT'
-        });
 
-        $('#stop_at').datetimepicker({
-            format: 'LT'
-        });
-    });
-</script>
 
 </html>

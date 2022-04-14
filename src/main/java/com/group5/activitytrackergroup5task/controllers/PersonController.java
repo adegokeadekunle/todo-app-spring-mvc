@@ -1,6 +1,7 @@
 package com.group5.activitytrackergroup5task.controllers;
 import com.group5.activitytrackergroup5task.dtos.LoginDto;
 import com.group5.activitytrackergroup5task.dtos.PersonDto;
+import com.group5.activitytrackergroup5task.dtos.TodoDto;
 import com.group5.activitytrackergroup5task.models.Person;
 import com.group5.activitytrackergroup5task.services.PersonService;
 import com.group5.activitytrackergroup5task.models.Todo;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import java.util.List;
@@ -28,17 +30,17 @@ public class PersonController {
         this.personService = personService;
     }
 
-
-    @PostMapping("/signup")
-    public String postSignup(@ModelAttribute PersonDto personDto){
-        personService.createPerson(personDto);
-        return "signup";
-    }
     @GetMapping("/signup")
     public String getSignup(Model model){
         PersonDto personDto = new PersonDto();
         model.addAttribute("personDto", personDto);
         return "signup";
+    }
+
+    @PostMapping("/signup")
+    public String postSignup(@ModelAttribute PersonDto personDto){
+        personService.createPerson(personDto);
+        return "redirect:/";
     }
 
     @GetMapping("/")
@@ -49,18 +51,19 @@ public class PersonController {
     }
 
     @PostMapping("/login")
-    public String login(@ModelAttribute("loginDto") LoginDto loginDto, HttpSession session){
+    public String login(@ModelAttribute("loginDto") LoginDto loginDto, HttpServletRequest request){
+       HttpSession session =  request.getSession();
         Person person = personService.login(loginDto);
-        System.out.println(person);
         if (person != null){
             session.setAttribute("user", person);
             return "redirect:/home";
         }
         return "redirect:/";
     }
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request){
 
-    @GetMapping("/home")
-    public String displayTracker(Model model){
-        return "tracker";
+        request.getSession().invalidate();
+        return  "redirect:/";
     }
 }
